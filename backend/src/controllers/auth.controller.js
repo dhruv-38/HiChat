@@ -20,7 +20,7 @@ export const signup = async (req, res) => {
             return res.status(400).json({ message: "Password must be at least 6 characters" });
         }
 
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const emailRegex = /^[^\s@]@[^\s@]\.[^\s@]$/;
         if (!emailRegex.test(normalizedEmail)) {
             return res.status(400).json({ message: "Invalid email format" });
         }
@@ -67,14 +67,14 @@ export const login = async (req, res) => {
     const { email, password } = req.body;
     
     const normalizedEmail = typeof email === "string" ? email.trim().toLowerCase() : "";
-    const pass = typeof password === "string" ? password.trim() : "";
+    const pass = typeof password === "string" ? password : "";
     
     try {
         if (!normalizedEmail || !pass) {
             return res.status(400).json({ message: "Invalid credentials" });
         }
         
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const emailRegex = /^[^\s@]@[^\s@]\.[^\s@]$/;
         if (!emailRegex.test(normalizedEmail)) {
             return res.status(400).json({ message: "Invalid credentials" });
         }
@@ -106,6 +106,11 @@ export const login = async (req, res) => {
 };
 
 export const logout = (_, res) => {
-    res.cookie("jwt", "", {maxAge:0})
-    res.status(200).json({message:"Logged out successfully"});
+    res.cookie("jwt", "", {
+        maxAge: 0,
+        httpOnly: true,
+        sameSite: "strict",
+        secure: ENV.NODE_ENV === "development" ? false : true,
+    });
+    res.status(200).json({ message: "Logged out successfully" });
 };
