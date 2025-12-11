@@ -9,7 +9,7 @@ export const signup = async (req, res) => {
 
     const name = typeof fullName === "string" ? fullName.trim() : "";
     const normalizedEmail = typeof email === "string" ? email.trim().toLowerCase() : "";
-    const pass = typeof password === "string" ? password.trim() : ""; // Added trim
+    const pass = typeof password === "string" ? password : "";
 
     try {
         if (!name || !normalizedEmail || !pass) {
