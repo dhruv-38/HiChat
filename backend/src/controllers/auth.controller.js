@@ -71,7 +71,7 @@ export const login = async (req, res) => {
     
     try {
         if (!normalizedEmail || !pass) {
-            return res.status(400).json({ message: "Invalid credentials" });
+            return res.status(400).json({ message: "Email and password are required" });
         }
         
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
