@@ -1,13 +1,15 @@
 import User from "../models/User.js";
 import bcrypt from "bcryptjs";
 import { generateToken } from "../lib/utils.js";
+import { sendWelcomeEmail } from "../emails/emailHandlers.js";
+import { ENV } from "../lib/env.js";
 
 export const signup = async (req, res) => {
     const { fullName, email, password } = req.body;
 
     const name = typeof fullName === "string" ? fullName.trim() : "";
     const normalizedEmail = typeof email === "string" ? email.trim().toLowerCase() : "";
-    const pass = typeof password === "string" ? password : ""; // Should also trim password
+    const pass = typeof password === "string" ? password.trim() : ""; // Added trim
 
     try {
         if (!name || !normalizedEmail || !pass) {
@@ -29,7 +31,6 @@ export const signup = async (req, res) => {
             return res.status(409).json({ message: "Email already exists" });
         }
 
-        // Remove the genSalt line - bcrypt.hash() auto-generates salt
         const hashedPassword = await bcrypt.hash(pass, 10); 
 
         const newUser = new User({
@@ -38,9 +39,11 @@ export const signup = async (req, res) => {
             password: hashedPassword,
         });
 
-        // Remove the 'if (newUser)' check - it's always truthy after instantiation
         await newUser.save();
         generateToken(newUser._id, res);
+
+        sendWelcomeEmail(newUser.email, newUser.fullName, ENV.CLIENT_URL)
+            .catch(error => console.error("Failed to send welcome email:", error));
 
         return res.status(201).json({
             _id: newUser._id,
@@ -51,8 +54,7 @@ export const signup = async (req, res) => {
 
     } catch (error) {
         console.error("Error in signup controller:", error);
-        
-        // Handle race-condition: unique email constraint violation (MongoDB E11000)
+        // Handle race-condition: duplicate key error for email uniqueness(MongoDB error code 11000)
         if (error.code === 11000 && (error.keyPattern?.email || error.keyValue?.email)) {
             return res.status(409).json({ message: "Email already exists" });
         }
