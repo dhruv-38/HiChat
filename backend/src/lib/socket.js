@@ -17,12 +17,12 @@ const io = new Server(server, {
 //apply middleware for all socket connections
 io.use(socketAuthMiddleware);
 
+// this is for storig online users
+const userSocketMap = {}; // {userId:socketId}
+
 export function getReceiverSocketId(userId) {
   return userSocketMap[userId];
 }
-
-// this is for storig online users
-const userSocketMap = {}; // {userId:socketId}
 
 io.on("connection", (socket) => {
     console.log("User connected:", socket.user.fullName);
