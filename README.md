@@ -18,7 +18,7 @@ A modern, real-time chat application built with the MERN stack, featuring secure
 - 👤 **User Profiles** - Customizable profile pictures with Cloudinary integration
 - 🎨 **Modern UI** - Beautiful interface with Tailwind CSS and DaisyUI
 - 🔒 **Rate Limiting** - Arcjet protection against brute force attacks
-- 📧 **Email Integration** - Welcome emails via Resend
+- 📧 **Email Integration** - Welcome emails via Resend( Only for testing purpose, not active in live website )
 - 🌐 **Responsive Design** - Works seamlessly on desktop and mobile
 - 🚀 **Production Ready** - Optimized builds and deployment configuration
 
@@ -294,3 +294,4 @@ For support, email dhruvchoudhay38@gmail.com or open an issue on GitHub.
 ---
 
 **Made with ❤️ by Dhruv Choudhary**
+
