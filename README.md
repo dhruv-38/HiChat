@@ -279,14 +279,6 @@ This project is licensed under the MIT License.
 - GitHub: [@dhruv-38](https://github.com/dhruv-38)
 - LinkedIn: [Dhruv Choudhary](https://linkedin.com/in/dhruvchoudhary38)
 
-## 🙏 Acknowledgments
-
-- React team for React 19
-- Socket.io for real-time communication
-- Tailwind CSS for the amazing utility classes
-- MongoDB team for the robust database
-- All open-source contributors
-
 ## 📧 Support
 
 For support, email dhruvchoudhay38@gmail.com or open an issue on GitHub.
@@ -294,4 +286,5 @@ For support, email dhruvchoudhay38@gmail.com or open an issue on GitHub.
 ---
 
 **Made with ❤️ by Dhruv Choudhary**
+
 
