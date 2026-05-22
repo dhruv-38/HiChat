@@ -9,7 +9,7 @@ A modern, real-time chat application built with the MERN stack, featuring secure
 
 ## 🌐 My Live Website
 
-**[Try HiChat Live](https://hichat-ditns.sevalla.app)** 🚀
+**[Try HiChat Live](https://hichat-i4qx.onrender.com)** 🚀
 
 ## ✨ Features
 
